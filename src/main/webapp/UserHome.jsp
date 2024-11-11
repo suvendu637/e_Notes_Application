@@ -143,7 +143,7 @@
         <a href="index.jsp" class="logo">eNotes</a>
         <div class="nav-buttons">
             <a href="index.jsp" class="nav-btn">Home</a>
-            <a href="UserHome.jsp" class="nav-btn">Profile</a>
+            <a href="Profile.jsp" class="nav-btn">Profile</a>
             <a href="LogoutServlet" class="nav-btn">Logout</a>
         </div>
     </div>

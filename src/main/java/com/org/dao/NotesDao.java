@@ -3,6 +3,7 @@ package com.org.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -39,6 +40,21 @@ public class NotesDao {
 		    em.remove(note);
 		    et.commit();
 	 }
+	 public int getNotesCountByUserId(int userId) {
+	        EntityManagerFactory emf = Helper.getEMF();
+	        EntityManager em = emf.createEntityManager();
+	        int count = 0;
+
+	        try {
+	            Query query = em.createQuery("SELECT COUNT(n) FROM Notes n WHERE n.user.id = :userId");
+	            query.setParameter("userId", userId);
+	            count = ((Long) query.getSingleResult()).intValue();
+	        } finally {
+	            em.close();
+	        }
+
+	        return count;
+	    }
 
 
 }
