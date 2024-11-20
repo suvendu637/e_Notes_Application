@@ -14,6 +14,12 @@
 
     body {
         font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #333;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     /* Navbar Styles */
@@ -23,6 +29,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Added 3D effect */
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
 
     .logo {
@@ -30,6 +38,7 @@
         text-decoration: none;
         font-size: 24px;
         font-weight: bold;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Text 3D effect */
     }
 
     .nav-buttons {
@@ -44,11 +53,13 @@
         border: 2px solid white;
         border-radius: 5px;
         transition: all 0.3s ease;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* Added button shadow */
     }
 
     .nav-btn:hover {
         background-color: white;
         color: #00796b;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Hover 3D effect */
     }
 
     /* Main Content Styles */
@@ -59,14 +70,16 @@
 
     .main-title {
         font-size: 36px;
-        color: #333;
+        color: #fff;
         margin-bottom: 20px;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Title shadow */
     }
 
     .main-subtitle {
         font-size: 18px;
-        color: #666;
+        color: #ddd;
         margin-bottom: 50px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Subtitle shadow */
     }
 
     /* Feature Cards */
@@ -79,38 +92,38 @@
     }
 
     .feature-card {
-        background-color: white;
-        border: 1px solid #ddd;
-        border-radius: 8px;
+        background: linear-gradient(145deg, #ffffff, #e6e6e6);
+        border-radius: 10px;
         padding: 20px;
         width: 300px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease;
+        box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2), -4px -4px 10px rgba(255, 255, 255, 0.7); /* 3D effect */
+        transition: all 0.3s ease;
     }
 
     .feature-card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-8px); /* Hover lift effect */
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3), -6px -6px 15px rgba(255, 255, 255, 0.9); /* Enhanced hover shadow */
     }
 
     .feature-title {
         font-size: 20px;
         color: #00796b;
         margin-bottom: 10px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Feature title shadow */
     }
 
     .feature-text {
         color: #666;
         line-height: 1.5;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Feature text shadow */
     }
 
     /* Footer */
     .footer {
-        background-color: #f5f5f5;
+        background-color: rgba(255, 255, 255, 0.8);
         text-align: center;
         padding: 20px;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
+        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* Footer shadow */
     }
 
     /* Responsive Design */

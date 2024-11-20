@@ -38,6 +38,9 @@ public class User {
 	private String email;
 	private String password;
 	
+	  @Column(name = "verification_code") // Name this if the column name should be different in the database
+	    private String verificationCode;
+	
 	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
 	private List<Notes> notes;
 
@@ -53,6 +56,7 @@ public class User {
 	public User() {
 		super();
 	}
+	
 	
 	
 

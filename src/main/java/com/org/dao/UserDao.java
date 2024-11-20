@@ -1,10 +1,12 @@
 package com.org.dao;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
@@ -72,4 +74,73 @@ public class UserDao {
 	    
 	    return notesList;
 	}
+	public void updatePasswordByEmail(String email, String newPassword) {
+	    EntityManager em = Helper.getEMF().createEntityManager();
+	    EntityTransaction et = em.getTransaction();
+	    
+	    try {
+	        et.begin();
+	        User user = em.createQuery("SELECT u FROM User u WHERE u.email = ?1", User.class)
+	                      .setParameter(1, email)
+	                      .getSingleResult();
+	        user.setPassword(newPassword);
+	        em.merge(user);
+	        et.commit();
+	    } finally {
+	        em.close();
+	    }
+	}
+	public boolean emailExists(String email) {
+        EntityManager em = Helper.getEMF().createEntityManager();
+        try {
+            User user = em.createQuery("SELECT u FROM User u WHERE u.email = ?1", User.class)
+                          .setParameter(1, email)
+                          .getSingleResult();
+            return user != null;
+        } catch (NoResultException e) {
+            return false;
+        } finally {
+            em.close();
+        }
+    }
+	
+	 public String generateVerificationCode(String email) {
+	        String code = String.format("%06d", new Random().nextInt(999999));
+	        EntityManager em = Helper.getEMF().createEntityManager();
+	        em.getTransaction().begin();
+	        em.createQuery("UPDATE User u SET u.verificationCode = ?1 WHERE u.email = ?2")
+	          .setParameter(1, code)
+	          .setParameter(2, email)
+	          .executeUpdate();
+	        em.getTransaction().commit();
+	        em.close();
+	        return code;
+	    }
+	 
+	 public boolean verifyCode(String email, String code) {
+	        EntityManager em = Helper.getEMF().createEntityManager();
+	        try {
+	            User user = em.createQuery("SELECT u FROM User u WHERE u.email = :email AND u.verificationCode = :code", User.class)
+	                          .setParameter("email", email)
+	                          .setParameter("code", code)
+	                          .getSingleResult();
+	            return user != null;
+	        } catch (NoResultException e) {
+	            return false;
+	        } finally {
+	            em.close();
+	        }
+	    }
+
+	 
+	 public void updatePassword(String email, String password) {
+	        EntityManager em =Helper.getEMF().createEntityManager();
+	        em.getTransaction().begin();
+	        em.createQuery("UPDATE User u SET u.password = :password WHERE u.email = :email")
+	          .setParameter("password", password)
+	          .setParameter("email", email)
+	          .executeUpdate();
+	        em.getTransaction().commit();
+	        em.close();
+	    }
 }
